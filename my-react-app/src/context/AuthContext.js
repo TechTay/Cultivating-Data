@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 const AuthContext = createContext();
 
@@ -58,14 +58,14 @@ export const AuthProvider = ({ children }) => {
         let loggedInUser = jwtDecode(response.data.access);
         setUser(setUserObject(loggedInUser));
         setIsServerError(false);
-        navigate("/");
+        navigate("/Home");
       } else {
-        navigate("/register");
+        navigate("/");
       }
     } catch (error) {
       console.log(error.response.data);
       setIsServerError(true);
-      navigate("/register");
+      navigate("/");
     }
   };
 
